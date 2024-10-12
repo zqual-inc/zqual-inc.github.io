@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/matrix_style.css">
+    <title>Matrix Calculator</title>
+    <script src="library/library.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.1.1/math.min.js"></script>
+
+    <!-- Advertisement -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5999347881289632"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Matrix Calculator</h1>
+        <div>   
+            <h2>Matrix A dimension M*N & Matrix B dimension M*N</h2>
+            <div class="dim">
+            <label>Enter M: <input type="number" id="M" placeholder="M"></label>
+            <label>Enter N: <input type="number" id="N" placeholder="N"></label>
+            </div>
+            <button onclick="generateMatrices()" style="margin-top: 33px;">Generate Matrices</button>
+        </div>
+
+        <div id="matrix-container">
+            <table id="matrixA"></table>
+        </div>
+
+        <div id="matrix-container">
+            <table id="matrixB"></table>
+        </div>
+
+        <div>
+            <button onclick="subtractMatrices()">Subtract</button>
+        </div>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <footer>
+        Contact Info: <a href="mailto:zqual2024@gmail.com" id="email-link">zqual2024@gmail.com</a>
+        <hr>
+        &copy; Zqual Inc. All Rights Reserved.
+    </footer>
+
+    <script>
+        let M, N; 
+        function generateMatrices() {
+            M = parseInt(document.getElementById("M").value);
+            N = parseInt(document.getElementById("N").value);
+
+            generateMatrix('matrixA', M, N); 
+            generateMatrix('matrixB', M, N);  
+        }
+
+        function subtractMatrices() {
+            let A = [], B = [], resultMatrix = [];
+            A = getMatrix('A', M, N);
+            B = getMatrix('B', M, N);
+
+            resultMatrix = math.subtract(A, B);
+            multiMatrixDisplayResult(resultMatrix);
+        }
+    </script>
+</body>
+</html>

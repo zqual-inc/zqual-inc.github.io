@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f7;
+    color: black;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #4a6fa5;
+    margin-bottom: 40px;
+}
+
+h2 {
+    text-align: center;
+    color: #2a5d84 ;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    margin: auto;
+    width: 250px;
+    padding: 15px 20px;
+    font-size: 1.1em;
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+}
+
+button:hover {
+    background-color: #3b598a;
+}
+
+#matrix-container {
+    margin: 20px;
+}
+
+input[type="number"] {
+    width: 125px;
+    height: 40px;
+    margin: 5px;
+    font-size: 1.1em;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+label {
+    font-size: 1.2em;
+    display: inline;
+}
+
+.dim {
+    display: flex;
+    justify-content: space-around;
+}
+
+caption {
+    color: #5a9bd6;
+    font-size: larger;
+}
+
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #888;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    table-layout: fixed; 
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th, td {
+    padding: 15px;
+    background-color: #f1f1f1;
+}
+
+#email-link {
+    all: unset;
+}
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .button-container {
+        flex-direction: column;
+    }
+
+    a {
+        width: 100%;
+        text-align: center;
+    }
+
+    input[type="number"] {
+        width: 50px;
+    }
+}

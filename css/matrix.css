@@ -25,21 +25,10 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.button-container {
-    display: flex;
-    justify-content: space-around;
-    margin: 30px 0;
-    flex-wrap: wrap;
-}
-
-.button-container div {
-    text-align: center;
-    margin: 10px;
-}
-
-a, button {
-    width: 200px;
-    padding: 15px 25px;
+button {
+    margin: auto;
+    width: 250px;
+    padding: 15px 20px;
     font-size: 1.1em;
     background-color: #4a6fa5;
     color: white;
@@ -48,24 +37,43 @@ a, button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-decoration: none;
-    display: inline-block;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
 }
 
-a:hover, button:hover {
+button:hover {
     background-color: #3b598a;
 }
 
-.matrix-section {
-    margin-top: 40px;
+.nav-menu {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    padding: 10px;
+    font-size: 20x;
+}
+
+.nav-menu a {
+    margin: 0 10px;
+    padding: 10px;
+    background-color: #4a6fa5;;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.nav-menu a:hover {
+    background-color: #3b598a;
 }
 
 #matrix-container {
-    margin-top: 20px;
+    margin: 20px;
 }
 
 input[type="number"] {
-    width: 150px;
+    width: 125px;
     height: 40px;
     margin: 5px;
     font-size: 1.1em;
@@ -74,12 +82,15 @@ input[type="number"] {
     border-radius: 5px;
 }
 
-button {
-    margin-top: 10px;
-}
 
 label {
     font-size: 1.2em;
+    display: inline;
+}
+
+.dim {
+    display: flex;
+    justify-content: space-around;
 }
 
 caption {
@@ -104,8 +115,6 @@ th, td {
     background-color: #f1f1f1;
 }
 
-
-
 footer {
     text-align: center;
     margin-top: 40px;
@@ -115,21 +124,4 @@ footer {
 
 #email-link {
     all: unset;
-}
-
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    .button-container {
-        flex-direction: column;
-    }
-
-    a {
-        width: 100%;
-        text-align: center;
-    }
-
-    input[type="number"] {
-        width: 50px;
-    }
 }

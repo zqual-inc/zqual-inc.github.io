@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="css/matrix_style.css">
+    <link rel="icon" type="image/x-icon" href="../image/favicon.ico">
+    <link rel="stylesheet" href="../css/matrix.css">
     <title>Matrix Calculator</title>
-    <script src="library/library.js" defer></script>
+    <script src="../library/library.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.1.1/math.min.js"></script>
 
     <!-- Advertisement -->
@@ -17,14 +17,22 @@
 <body>
     <div class="container">
         <h1>Matrix Calculator</h1>
-        <div>   
-            <h2>Matrix A dimension M*N & Matrix B dimension M*N</h2>
-            <div class="dim">
-            <label>Enter M: <input type="number" id="M" placeholder="M"></label>
-            <label>Enter N: <input type="number" id="N" placeholder="N"></label>
+        <div>
+            <h2>Matrix A dimension M*N & Matrix B dimension N*K</h2>
+            <div class="dim"> 
+                <label>Enter M: <input type="number" id="M" placeholder="M"></label>
+                <label>Enter N: <input type="number" id="N" placeholder="N"></label>
+                <label>Enter K: <input type="number" id="K" placeholder="K"></label>
             </div>
             <button onclick="generateMatrices()" style="margin-top: 33px;">Generate Matrices</button>
         </div>
+
+        <nav class="nav-menu"> 
+            <a href="../index.html"> Homepage </a> |
+            <a href="matrix.html"> Matrix </a> |
+            <a href="number.html"> Number </a>
+        </nav>
+
 
         <div id="matrix-container">
             <table id="matrixA"></table>
@@ -35,33 +43,35 @@
         </div>
 
         <div>
-            <button onclick="addMatrices()">Add</button>
+            <button onclick="multiplyMatrices()">Multiply</button>
         </div>
 
         <div class="result" id="result"></div>
     </div>
 
     <footer>
-        Contact Info: <a href="mailto:zqual2024@gmail.com" id="email-link">zqual2024@gmail.com</a>
+        Contact Info: <a href="mailto:zqual.inc@gmail.com" id="email-link">zqual.inc@gmail.com</a>
         <hr>
         &copy; Zqual Inc. All Rights Reserved.
     </footer>
 
     <script>
-        let M, N;
+        let M, N, K; 
         function generateMatrices() {
             M = parseInt(document.getElementById("M").value);
             N = parseInt(document.getElementById("N").value);
+            K = parseInt(document.getElementById("K").value);
+
             generateMatrix('matrixA', M, N); 
-            generateMatrix('matrixB', M, N);  
+            generateMatrix('matrixB', N, K);  
         }
 
-        function addMatrices() {
+        function multiplyMatrices() {
             let A = [], B = [], resultMatrix = [];
             A = getMatrix('A', M, N);
-            B = getMatrix('B', M, N);
+            B = getMatrix('B', N, K);
 
-            resultMatrix = math.add(A, B);
+            resultMatrix = math.multiply(A, B);
             multiMatrixDisplayResult(resultMatrix);
         }
     </script>

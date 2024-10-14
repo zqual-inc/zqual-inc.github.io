@@ -25,10 +25,44 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-button {
-    margin: auto;
-    width: 250px;
-    padding: 15px 20px;
+.nav-menu {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    padding: 10px;
+    font-size: 20x;
+}
+
+.nav-menu a {
+    all: unset; /* clean the a settings down below */
+    margin: 0 10px;
+    padding: 10px;
+    background-color: #4a6fa5;;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.nav-menu a:hover {
+    background-color: #3b598a;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.button-container div {
+    text-align: center;
+    margin: 10px;
+}
+
+a, button {
+    width: 200px;
+    padding: 15px 25px;
     font-size: 1.1em;
     background-color: #4a6fa5;
     color: white;
@@ -37,21 +71,24 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-decoration: none;
+    display: inline-block;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    display: flex;
-    justify-content: center;
 }
 
-button:hover {
+a:hover, button:hover {
     background-color: #3b598a;
 }
 
+.matrix-section {
+    margin-top: 40px;
+}
+
 #matrix-container {
-    margin: 20px;
+    margin-top: 20px;
 }
 
 input[type="number"] {
-    width: 125px;
+    width: 150px;
     height: 40px;
     margin: 5px;
     font-size: 1.1em;
@@ -60,28 +97,17 @@ input[type="number"] {
     border-radius: 5px;
 }
 
+button {
+    margin-top: 10px;
+}
 
 label {
     font-size: 1.2em;
-    display: inline;
-}
-
-.dim {
-    display: flex;
-    justify-content: space-around;
 }
 
 caption {
     color: #5a9bd6;
     font-size: larger;
-}
-
-
-footer {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 0.9em;
-    color: #888;
 }
 
 table {
@@ -99,6 +125,15 @@ table, th, td {
 th, td {
     padding: 15px;
     background-color: #f1f1f1;
+}
+
+
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #888;
 }
 
 #email-link {

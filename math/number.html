@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+    <header>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="../image/favicon.ico">
+        <title>Number Properties</title>
+        
+        <link rel="stylesheet" href="../css/number.css">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async
+                src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>       
+    </header>
+
+    <body>
+        <h1> Number Properties </h1>
+        <p id="count">Please enter an integer which are larger than 0</p>
+        <input id="input" type="number" min="1" max="999" placeholder="Enter a number">
+        <button id="add" onclick="enterValue()">Enter</button>
+
+        <nav class="nav-menu"> 
+            <a href="../index.html"> Homepage </a> |
+            <a href="matrix.html"> Matrix </a> |
+            <a href="number.html"> Number </a>
+        </nav>
+        
+        <table id="table1"></table>
+        <table id="table2" style="border: 2px;"></table>
+
+        <script>
+            function enterValue() {
+                let prime = false, armstrong = false, fibonacci = false;
+                let number = parseInt(document.getElementById("input").value);
+                var factor = [], power = [];
+
+                if (number > 0) {
+                    /*check if the number is prime */
+                    let factors = 0, number_copy = number;
+                    if (number > 1) {
+                        for (let i = 2; i < number; i++) {
+                            let factor_i = false, count = 0; 
+                            while(number_copy % i == 0) {
+                                number_copy = number_copy / i;
+                                factors++;
+                                factor_i = true; 
+                                count++;
+                            }
+                            if(factor_i){
+                                factor.push(i);
+                                power.push(count);
+                            }
+                            if(number_copy == 1) break; 
+                        }
+                        if (factors == 0) {
+                            prime = true;
+                            factor.push(number);
+                            power.push(1);
+                        }
+                    }else if(number == 1){
+                        factor.push(1);
+                        power.push(1);
+                    }
+
+                    /*check if the number is armstrong */
+                    let n = number.toString().length, number_copy1 = number, number_copy2 = number;
+                    for(let i = 1; i <= n; i++) {
+                        number_copy1 -= Math.pow(number_copy2%10, n);
+                        number_copy2 = Math.floor(number_copy2/10);
+                    }
+                    if (number_copy1 == 0) {
+                        armstrong = true;
+                    }
+
+                    /*check if the number is Fibonacci */
+                    let a = 1, b = 2;
+                    while(1){
+                        if(number == a){
+                            fibonacci = true;
+                            break; 
+                        }else if(a>number){
+                            break;
+                        }else{
+                            let tmp = b + a;
+                            a = b; 
+                            b = tmp; 
+                        }
+                    }
+    
+                    document.getElementById("table1").innerHTML = 
+                    '<tr><td>Number: </td> <td>' + print_numbers(number) + '</td></tr>' +
+                    '<tr><td>Factorization: </td><td>' + print_numbers_factor(factor, power) + '</td></tr></table>' ;
+
+                    document.getElementById("table2").innerHTML = 
+                    '<tr><td>Prime numbers: </td> <td>' + print_prime(prime) + '</td></tr>'+
+                    '<tr><td>Armstrong numbers: </td> <td>' + print_armstrong(armstrong) + '</td></tr>' + 
+                    '<tr><td>Fibonacci numbers: </td> <td>' + print_fibonacci(fibonacci) + '</td></tr></table>'; 
+            
+                } else {
+                    alert("Please enter a number larger than 0");
+                }
+            
+                document.getElementById("input").value = ""; 
+            }
+
+            function print_prime(prime){
+                let ans = "";
+                if(prime){
+                    ans += "Yes";
+                }else{
+                    ans += "No"
+                }
+                return ans; 
+            }
+
+            function print_armstrong(armstrong){
+                let ans = "";
+                if(armstrong){
+                    ans += "Yes";
+                }else{
+                    ans += "No"
+                }
+                return ans; 
+            }
+
+
+            function print_fibonacci(fibonacci){
+                let ans = "";
+                if(fibonacci){
+                    ans += "Yes";
+                }else{
+                    ans += "No"
+                }
+                return ans; 
+            }
+
+            function print_numbers(number){
+                let ans = '';
+                number = number.toString();
+                let length = number.length;
+                for(let i = 0; i < length; i++){
+                    let digit = number[i];
+                    let path = '../image/number/' + digit + '.png';
+                    ans += '<img src="' + path + '" width="50px" height = "50px" >';
+                }
+                return ans;
+            }
+        
+            function print_numbers_factor(factor, power){
+                let ans = '';
+                let i; 
+                for(i = 0; i < factor.length-1; i++){
+                    ans += `${factor[i]}${power[i] != 1 ? '^' + power[i] : ''}*`;
+                }
+                ans += `${factor[i]}${power[i] != 1 ? '^' + power[i] : ''}`;
+                return ans; 
+            }
+
+        </script>
+    </body>
+
+    <footer>
+        Contact Info: <a href="mailto:zqual.inc@gmail.com" id="email-link">zqual.inc@gmail.com</a>
+        <hr>
+        &copy; Zqual Inc. All Rights Reserved.
+    </footer>
+
+</html>
+
+
+ 

@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+
+h1 {
+    text-align: center;
+    color: #4a6fa5;
+}
+
+input[type="number"] {
+    padding: 10px;
+    font-size: 1.2em;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3b598a;
+}
+
+.nav-menu {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 20x;
+}
+
+.nav-menu a {
+    margin: 0 10px;
+    padding: 10px;
+    background-color: #4a6fa5;;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.nav-menu a:hover {
+    background-color: #3b598a;
+}
+
+p#count {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: #777;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th, td {
+    padding: 15px;
+    background-color: #f1f1f1;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #888;
+}
+
+#email-link {
+    all: unset;
+}

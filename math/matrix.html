@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../image/favicon.ico">
+    <link rel="stylesheet" href="../css/matrixMain.css">
+    <title>Matrix Calculator</title>
+    <script src="../library/library.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.1.1/math.min.js"></script>
+
+    <!-- Advertisement -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1223013288426205"
+    crossorigin="anonymous"></script>
+
+    <!-- Google-Console -->
+    <meta name="google-site-verification" content="I_ZQsFhl33P3_csLYwMqr1NTldiXSG23SNk3BWmRHEM" />
+</head>
+<body>
+    <div class="container">
+        <h1>Multi-Matrix Calculator</h1> 
+
+        <h2>Operations</h2>
+        <div class="button-container">
+            <div><a href="add.html">Add</a></div>
+            <div><a href="subtract.html">Subtract</a></div>
+            <div><a href="multiply.html">Multiply</a></div>
+        </div>
+
+        <nav class="nav-menu"> 
+            <a href="../index.html"> Homepage </a> |
+            <a href="matrix.html"> Matrix </a> |
+            <a href="number.html"> Number </a>
+        </nav>
+
+
+        <hr><br> 
+        
+        <h2>Square Matrix Properties</h2>
+        <div>
+            <label>Enter Matrix dimension M: <input type="number" id="M" placeholder="M"></label>
+            <button onclick="generateMatrices()" style="width: 300px; height: 40px; padding: 0px;">Generate Matrix</button>
+        </div>
+
+        <div id="matrix-container">
+            <table id="matrix"></table>
+        </div>
+
+        <div class="button-container">
+            <div><button onclick="Rank()">Rank</button></div>
+            <div><button onclick="Inverse()">Inverse</button></div>
+            <div><button onclick="Determinant()">Determinant</button></div>
+        </div>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <footer>
+        Contact Info: <a href="mailto:zqual.inc@gmail.com" id="email-link">zqual.inc@gmail.com</a>
+        <hr>
+        &copy; Zqual Inc. All Rights Reserved.
+    </footer>
+
+    <script>
+        let M; 
+        function generateMatrices() {
+            M = parseInt(document.getElementById("M").value);
+            generateMatrix('matrix', M, M);  
+        }
+
+        function Rank() {
+            let A = getMatrix('', M, M);
+            let rank = calculateRank(A);
+            squareMatrixDisplayResult(rank);
+        }
+
+        function Inverse() {
+            let A = getMatrix('', M, M);
+            let inverse;
+
+            try {
+                inverse = math.inv(A);
+            } catch (err) {
+                squareMatrixDisplayResult("Matrix is singular and cannot be inverted.");
+                return;
+            }
+
+            squareMatrixDisplayResult(inverse);
+        }
+
+        function Determinant() {
+            let A = getMatrix('', M, M);
+            let determinant = math.det(A);
+            squareMatrixDisplayResult(determinant);
+        }
+
+    </script>
+</body>
+</html>

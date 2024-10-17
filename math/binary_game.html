@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title> 猜數字遊戲 </title>
+    <link rel="stylesheet" href="../css/hw2.css">
+    <link rel="icon" type="image/x-icon" href="../image/favicon.ico">  
+    <script src="../library/hw2.js"></script>
+
+    <!-- Advertisement -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1223013288426205"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <h1> 猜數字遊戲 </h1>
+
+    <nav class="nav-menu" style="position: fixed; top: 15px; right: 20px; padding: 10px; font-weight: bold; font-size: 20px;">
+        <a href="../index.html" style="margin: 0 10px; padding: 10px; background-color: #4a6fa5; color: #fff; border-radius: 10px; text-decoration: none; transition: background-color 0.3s ease-in-out;">Homepage</a>
+    </nav>
+
+
+    <h3> 遊戲說明 </h3>
+    <p> 
+        心中想一個數字，如果有出現在下面的表格中，請將表格打勾，最後按下number鍵
+    </p>
+
+    <div>
+        <table id="table1"><caption><input type="checkbox" id="table1_checkbox" name="table1_checkbox" value="True">Table 1</caption></table> 
+    </div>
+
+    <div>
+        <table id="table2"><caption><input type="checkbox" id="table2_checkbox" name="table2_checkbox" value="True">Table 2</caption></table> 
+    </div>
+
+    <div>
+        <table id="table3"><caption><input type="checkbox" id="table3_checkbox" name="table3_checkbox" value="True">Table 3</caption></table> 
+    </div>
+
+    <div>
+        <table id="table4"><caption><input type="checkbox" id="table4_checkbox" name="table4_checkbox" value="True">Table 4</caption></table> 
+    </div>
+
+    <div> 
+        <table id="table5"><caption><input type="checkbox" id="table5_checkbox" name="table5_checkbox" value="True">Table 5</caption></table> 
+    </div>
+
+    <div> 
+        <table id="table6"><caption><input type="checkbox" id="table6_checkbox" name="table6_checkbox" value="True"> Table 6</caption></table> 
+    </div>
+    
+    <div class="button-container">
+        <p onclick="Solution()">Number</p>
+    </div>
+    
+    <h3 id="Ans" style="text-align: center; font-size: large; margin: 50px;"></h3>
+
+</body>
+
+<footer style="text-align: center; margin-top: 50px; margin-bottom: 30px; font-size: 1em; color: #888;">
+    Contact Info: <a href="mailto:zqual.inc@gmail.com" id="email-link" style="all: unset;">zqual.inc@gmail.com</a>
+    <hr>
+    &copy; Zqual Inc. All Rights Reserved.
+</footer>
+
+</html>

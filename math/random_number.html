@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Random Number Generator</title>
+    <link rel="icon" type="image/x-icon" href="../image/favicon.ico">
+    <link rel="stylesheet" href="../css/lottery.css">
+
+    <!-- Advertisement -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1223013288426205"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1> 隨機數字產生器 </h1>
+    <h4> 請輸入要產生數字的範圍(1~n)</h4>
+    <input id="range" placeholder="Enter a positive number" type="number" width="600px" style="display: inline-block;">
+    <h4> 請輸入要產生幾個數字(需小於30)</h4>
+    <input id="count" placeholder="Enter a positive number" type="number" width="400px" style="display: inline-block;">
+    <button onclick="generateNumbers()" > Generate </button>
+
+    <nav class="nav-menu"> 
+        <a href="../index.html"> Homepage </a>
+    </nav>
+
+    <table id="numbers">
+        <tr id="col1" style="display: none;">
+            <td id="num1"> </td>
+            <td id="num2"> </td>
+            <td id="num3"> </td>
+            <td id="num4"> </td>
+            <td id="num5"> </td>
+            <td id="num6"> </td>
+        </tr>
+        <tr id="col2" style="display: none;">
+            <td id="num7"> </td>
+            <td id="num8"> </td>
+            <td id="num9"> </td>
+            <td id="num10"> </td>
+            <td id="num11"> </td>
+            <td id="num12"> </td>
+        </tr>
+        <tr id="col3" style="display: none;">
+            <td id="num13"> </td>
+            <td id="num14"> </td>
+            <td id="num15"> </td>
+            <td id="num16"> </td>
+            <td id="num17"> </td>
+            <td id="num18"> </td>
+        </tr>
+        <tr id="col4" style="display: none;">
+            <td id="num19"> </td>
+            <td id="num20"> </td>
+            <td id="num21"> </td>
+            <td id="num22"> </td>
+            <td id="num23"> </td>
+            <td id="num24"> </td>
+        </tr>
+        <tr id="col5" style="display: none;">
+            <td id="num25"> </td>
+            <td id="num26"> </td>
+            <td id="num27"> </td>
+            <td id="num28"> </td>
+            <td id="num29"> </td>
+            <td id="num30"> </td>
+        </tr>
+    </table>
+</body>
+
+<footer>
+    Contact Info: <a href="mailto:zqual.inc@gmail.com" id="email-link">zqual.inc@gmail.com</a>
+    <hr>
+    &copy; Zqual Inc. All Rights Reserved.
+</footer>
+
+<script> 
+
+function generateNumbers(){
+    clearAll();  
+    let array = [];
+    let n = parseInt(document.getElementById("range").value);
+    let count = parseInt(document.getElementById("count").value);
+
+    while(array.length != count){
+        let num, same;
+        do{
+            same = 0;
+            num = Math.floor(Math.random() * n) + 1;
+            for(let i = 0; i < array.length; i++){
+                if(array[i] == num){
+                    same++;
+                    break;
+                }
+            }
+        } while(same != 0);
+        array.push(num);
+    }
+
+    for(let i = 0; i < array.length; i++){
+        showNumber(array[i], i + 1);
+    }
+}
+
+function showNumber(num, i){
+    document.getElementById(`col${Math.floor((i - 1) / 6) + 1}`).style.display = "block";
+    let cell = document.getElementById(`num${i}`);
+    cell.innerHTML = "";  
+    num = num.toString();
+    for(let j = 0; j < num.length; j++){
+        cell.innerHTML += `<img src="../image/number/${num[j]}.png">`;
+    }
+}
+
+function clearAll(){
+    for(let i = 1; i <= 5; i++){
+        document.getElementById(`col${i}`).style.display = "none";
+    }
+
+    for(let i = 1; i <= 30; i++){
+        let cell = document.getElementById(`num${i}`);
+        if (cell) {
+            cell.innerHTML = "";
+        }
+    }
+}
+
+</script> 
+</html>  

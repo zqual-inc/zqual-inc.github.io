@@ -2,16 +2,22 @@
 <html>
 <head> 
     <meta charset="utf-8">
-    <title>BlackJack</title>
+    <title>Blackjack</title>
     <link rel="stylesheet" href="../css/game.css">
     <link rel="icon" type="image/png" href="../image/favicon.ico">
 
     <!-- Advertisement -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1223013288426205"
-    crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
 </head>
 
 <body> 
+
+    <!-- Add homepage button -->
+    <nav class="nav-menu" style="position: fixed; top: 15px; right: 20px; padding: 10px; font-weight: bold; font-size: 20px;">
+        <a href="../index.html" style="margin: 0 10px; padding: 10px; background-color: #4a6fa5; color: #fff; border-radius: 10px; text-decoration: none; transition: background-color 0.3s ease-in-out;">Homepage</a>
+    </nav>
+
     <h2 id="bank">Bank: </h2>
     <h2 id="pot">Pot: </h2>
     <p id="count" style="color: lightgray; font-size: large;" >How much money do you want to bet?</p>
@@ -19,13 +25,8 @@
     <button id="firstBet" onclick="firstBet()">First Bet</button>
     <button id="secondBet" onclick="secondBet()" style="display: none;">Additional Bet</button>
 
-    <!-- Homepage button -->
-    <nav class="nav-menu" style="position: fixed; top: 15px; right: 20px; padding: 10px; font-weight: bold; font-size: 20px;">
-        <a href="../index.html" style="margin: 0 10px; padding: 10px; background-color: #4a6fa5; color: #fff; border-radius: 10px; text-decoration: none; transition: background-color 0.3s ease-in-out;">Homepage</a>
-    </nav>
-
-    <!-- show or hide process table -->
-    <button id= "showProcessTable" onclick="showProcessTable()"> Process Table </button>
+    <!-- show or hide game history -->
+    <button id= "showProcessTable" onclick="showProcessTable()"> History </button>
 
     <!-- Blackjack Table -->
     <div id="dealer">Dealer's Cards </div>
@@ -41,8 +42,9 @@
     <p id="result"></p>
     <button id="reset" style="display: none;" onclick="showPopUp()"> Reset </button>
 
+    <!-- game history would only record the last 20 steps -->
     <table id="processTable" style="display: none;">
-        <tr> <th colspan="6">Game Process </th></tr>
+        <tr><th colspan="6">Game History</th></tr>
         <tr>
             <th>Step</th>
             <th>Action</th>
@@ -57,10 +59,16 @@
     <div id="popup-overlay"></div>
     <div id="popup">
         <h4>Your bank money is reset to 1000. </h4>
-        <button class="close-button" onclick="closePopup()">Close</button>
+        <button class="close-button" onclick="closePopup()">Ok</button>
     </div>
 
 </body>
+
+<footer style="text-align: center; margin-top: 40px; margin-bottom: 30px; color: #888;">
+    Contact Info: <a href="mailto:zqual.inc@gmail.com" id="email-link" style="all: unset;">zqual.inc@gmail.com</a>
+    <hr>
+    &copy; Zqual Inc. All Rights Reserved.
+</footer>
 
 <script> 
     let chips, bank;
@@ -68,6 +76,7 @@
     let stepCounter = 0;
 
     window.onload = function() {
+        // Retrieve bank money info from local storage
         if (typeof(Storage) !== "undefined") {
             bank = localStorage.getItem("bank") ? parseInt(localStorage.getItem("bank")) : 1000;
             document.getElementById("bank").innerHTML = `Bank: ${bank}`;
@@ -89,6 +98,8 @@
 
         if (chips > 0 && chips <= bank) {
             bank -= chips; 
+
+            // assign two cards
             dealer = [generateCard(), generateCard()];
             player = [generateCard(), generateCard()];
 
@@ -99,6 +110,7 @@
 
             recordProcess("Bet placed", showAllCards(player), `<img src="../image/cards/${dealer[0]}.png"> <img src="../image/cards/back.png">`, "Game started", bank);
 
+            // You got blackjack
             if (sum(player) === 21) {
                 document.getElementById("dealer").innerHTML = `Dealer's Cards<br>${showAllCards(dealer)}`;
                 document.getElementById("dealer_sum").style.display = "block";
@@ -107,7 +119,7 @@
                 if(sum(dealer) == 21){
                     document.getElementById('result').innerHTML = "Push (Even)";
                     bank += chips;
-                    recordProcess("Blackjack", showAllCards(player), showAllCards(dealer), "Push", bank);
+                    recordProcess("Both Blackjack", showAllCards(player), showAllCards(dealer), "Push", bank);
                 } else {
                     document.getElementById('result').innerHTML = "Blackjack! You win!";
                     bank += chips * 2.5;
@@ -115,7 +127,7 @@
                 }
                 endGame();
             } else {
-                document.getElementById("firstBet").style.display = "none";
+                document.getElementById("firstBet").style.display = "none"; // Hide first bet button to prevent misusing
                 document.getElementById("hit").style.display = "inline-block"; 
                 document.getElementById("stand").style.display = "inline-block"; 
                 if(bank > 0){
@@ -123,7 +135,6 @@
                 }
             }
             document.getElementById("bank").innerHTML = `Bank: ${bank}`;
-            localStorage.setItem("bank", bank); 
         } else {
             alert("Please enter a valid bet amount larger than 0 and less than or equal to your bank.\n If you are bankrupt, please press reset to play again.");
         }
@@ -148,6 +159,7 @@
     function stand() {
         let dealer_sum = sum(dealer), player_sum = sum(player);
 
+        // Dealer got blackjack and player doesn't
         if(dealer_sum == 21){
             document.getElementById("dealer").innerHTML = `Dealer's Cards<br>${showAllCards(dealer)}`;
             document.getElementById("dealer_sum").style.display = "block";
@@ -179,7 +191,6 @@
             document.getElementById('result').innerHTML = "You lose!";
             recordProcess("Stand", showAllCards(player), showAllCards(dealer), "Lose", bank);
         }
-
         endGame();
     }
 
@@ -220,6 +231,7 @@
             if(bank > 0){
                 document.getElementById("signal").style.display = "inline-block";
             }
+            // automatically excute hit function 
             hit();
         }else{
             alert("Please enter a valid bet amount larger than 0 and less than or equal to your bank.\n If you are bankrupt, please press reset to play again.");
@@ -231,8 +243,9 @@
 
         for (let card of array) {
             let cardValue = Math.floor((card - 1) / 4) + 1; 
-            if (cardValue === 1) aceCount++; 
-
+            if (cardValue === 1){
+                aceCount++; 
+            }
             total += (cardValue > 10) ? 10 : cardValue;
         }
 
@@ -246,6 +259,7 @@
 
     function resetGame() {
         chips = 0;
+        stepCounter = 0;
         dealer = [];
         player = [];
         document.getElementById("pot").innerHTML = "Pot: ";
@@ -267,9 +281,23 @@
 
     function endGame() {
         document.getElementById("bank").innerHTML = `Bank: ${bank}`;
-        localStorage.setItem("bank", bank); 
         document.getElementById("pot").innerHTML = `Pots:`;
 
+        // Store the bank money into local and session storage
+        localStorage.setItem("bank", bank);
+        sessionStorage.setItem("bank", bank);
+
+        // Store the dealer info into session storage 
+        let dealer_cards_value = {cards_number: dealer.length, cards: countValue(dealer)}; 
+        let dealerJSON = JSON.stringify(dealer_cards_value);
+        sessionStorage.setItem("dealerJSON", dealerJSON);
+
+        // Store the player info into session storage
+        let player_cards_value = {cards_number: player.length, cards: countValue(player)};
+        let playerJSON = JSON.stringify(player_cards_value);
+        sessionStorage.setItem("playerJSON", playerJSON);
+
+        // Hide player's decision to prevent misusing
         document.getElementById("firstBet").style.display = "inline-block";
         document.getElementById("hit").style.display = "none";
         document.getElementById("stand").style.display = "none";
@@ -279,11 +307,13 @@
             document.getElementById("result").innerHTML = "Game Over. You are out of money!";
             document.getElementById("reset").style.display = "inline-block";
         }
+        
     }
 
     function showPopUp(){
         document.getElementById('popup').style.display = 'block';
         document.getElementById('popup-overlay').style.display = 'block';
+        // Reset the bank money to 1000
         bank = 1000; 
         localStorage.setItem("bank", bank);
         document.getElementById("bank").innerHTML = `Bank: ${bank}`;
@@ -296,12 +326,25 @@
         document.getElementById('popup-overlay').style.display = 'none';
     }
 
+    // To show or hide the game history table
     function showProcessTable(){
         if(document.getElementById("processTable").style.display == "none"){
             document.getElementById("processTable").style.display = "inline-block"
         }else{
             document.getElementById("processTable").style.display = "none";
         }
+    }
+
+    // Calculate the card value without the suit
+    function countValue(array){
+        let ans = [];
+
+        for (let card of array) {
+            let cardValue = Math.floor((card - 1) / 4) + 1; 
+            ans.push(cardValue);
+        }
+
+        return ans;
     }
 
 </script>

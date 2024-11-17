@@ -1,24 +1,28 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #2e8b57; 
-    color: #fff;
+    color: #fff; 
     text-align: center;
     margin: auto;
     padding: 20px;
     width: 900px;
+
+    background-image: url("../image/cards/green.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 h3, p {
-    margin: 10px;
+    margin: 15px;
 }
 
 input[type="number"] {
     padding: 8px;
-    width: 250px;
+    width: 230px;
     margin: 10px;
     border: 2px solid #fff;
     border-radius: 5px;
-    text-align: center;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
@@ -30,29 +34,49 @@ input[type="number"]:focus {
 button {
     font-size: 1em;
     padding: 10px 20px;
-    margin: 10px;
+    margin: 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: transform 0.2s, background-color 0.3s;
 }
 
+button:hover {
+    transform: scale(1.05);
+    opacity: 0.9; 
+}
+
+
 #firstBet {
-    background-color: #ffcc00; 
+    background-color: #ffcc00;
+    color: #000;
+}
+
+#secondBet {
+    background-color: #ffcc00;
     color: #000;
 }
 
 #hit {
+    width: 150px;
     background-color: #ff6347; 
     color: #fff;
 }
 
 #stand {
-    background-color: #4682b4;
+    width: 150px;
+    background-color: #4682b4; 
+    color: #fff;
+}
+
+#signal {
+    width: 150px;
+    background-color: #FFA500; 
     color: #fff;
 }
 
 #reset {
+    width: 200px;
     background-color: #d9534f;
     color: #fff;
 }
@@ -63,12 +87,6 @@ button {
     color: #ffcc00;
     margin-top: 40px;
     margin-bottom: 40px;
-}
-
-
-button:hover {
-    transform: scale(1.05); 
-    opacity: 0.9;
 }
 
 img {
@@ -84,6 +102,7 @@ img {
     border: 2px dashed #fff;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.1);
+    height: 110px;
 }
 
 #popup-overlay {
@@ -96,6 +115,7 @@ img {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
+
 
 #popup {
     display: none;
@@ -126,7 +146,6 @@ img {
     background-color: #c9302c;
 }
 
-
 #processTable {
     border-collapse: collapse;
     margin-left: auto; 
@@ -139,10 +158,6 @@ img {
     text-align: center;
     background-color: lightgray;
     padding: 3px;
-}
-
-#processTable tr:hover {
-    background-color: #ffcccc;
 }
 
 #showProcessTable {

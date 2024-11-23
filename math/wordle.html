@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Wordle Game</title>
+    <link rel="stylesheet" href="../css/wordle.css">
+    <script src="../library/dictionary.js"></script>
+    <link rel="icon" type="image/png" href="../image/favicon.ico">
+
+    <!-- Advertisement -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1223013288426205"
+        crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <h1> <span style="color: rgb(62, 60, 60);">W<span style="color: orange;">or</span><span style="color: green;">dle</span></h1>
+
+    <nav class="nav-menu" style="position: fixed; top: 15px; right: 20px; padding: 10px; font-weight: bold; font-size: 20px;">
+        <a href="../index.html" style="margin: 0 10px; padding: 10px; background-color: #4a6fa5; color: #fff; border-radius: 10px; text-decoration: none; transition: background-color 0.3s ease-in-out;">Homepage</a>
+    </nav>
+
+    <div id="board"></div>
+    <div id="keyboard"></div>
+
+    <!-- pop up message -->
+    <div id="popup-overlay"></div>
+    <div id="popup">
+    <h4 id="result"></h4>
+    <button id="endGameButton" class="closeButton" onclick="closePopup(endGame = true)" style="display: none;">Ok</button>
+    <button id="contiGameButton" class="closeButton" onclick="closePopup(endGame = false)" style="display: none;">Ok</button>
+    </div>
+</body>
+<footer style="text-align: center; margin-top: 40px; margin-bottom: 30px; font-size: 1.5em; color: #888;">
+    Contact Info: <a href="mailto:zqual.inc@gmail.com" id="email-link" style="all: unset;">zqual.inc@gmail.com</a>
+    <hr>
+    &copy; Zqual Inc. All Rights Reserved.
+</footer>
+</html>
+
+<script> 
+let answer = DICTIONARY[Math.floor(Math.random() * DICTIONARY.length)].toUpperCase();
+// console.log(answer);
+
+// Create board 
+for (let i = 0; i < 30; i++) {
+    document.getElementById("board").innerHTML += `<div id='letter${i}' class='letter'> </div>`;
+}
+
+// Create keyboard
+for(let key of "q w e r t y u i o p - . a s d f g h j k l . z x c v b n m =".split(' ')){
+    if(key == '-'){
+        key = '&#8636';
+        document.getElementById("keyboard").innerHTML += `<div id='Backspace' class = 'key'>${key}</div>`;
+    }
+    else if(key == '='){
+        key = 'ENTER';
+        document.getElementById("keyboard").innerHTML += `<div id='Enter' class = 'key' style="width:140px">${key}</div>`;
+    }else if(key == '.'){
+        document.getElementById("keyboard").innerHTML += `<br>`;
+    }else{
+        document.getElementById("keyboard").innerHTML += `<div id='key${key.toUpperCase()}' class = 'key'>${key.toUpperCase()}</div>`;
+    }
+}
+
+let currentLetter = 0; 
+let letterArray = document.getElementsByClassName('letter');
+let keyArray = document.getElementsByClassName('key');
+
+// Screen keyboard control 
+for(let i = 0; i < keyArray.length; i++){
+    keyArray[i].addEventListener('click', function(e){
+        keyProcess(e.target.id, e.target.innerHTML);
+    });
+}
+
+// Keyboard control 
+window.addEventListener('keydown', function(e){
+    keyProcess(e.code, e.key);
+});
+
+function keyProcess(code, key){
+    if(code == 'Backspace'){
+        if(letterArray[currentLetter].innerHTML === " "){
+            if(currentLetter%5>0) 
+                currentLetter--;  
+        }
+        letterArray[currentLetter].innerHTML = " ";
+    }else if(code == 'Enter'){
+        // check if the answer is correct
+        if((currentLetter%5 == 4) && (letterArray[currentLetter].innerHTML != " ")){
+            let guess = '';
+            //check if the word is in the dictionary
+            for(let i = currentLetter-4; i <= currentLetter; i++){
+                guess += letterArray[i].innerHTML;
+            }
+
+            if(!DICTIONARY.includes(guess.toLowerCase())){
+                document.getElementById("result").innerHTML = "Volcabulary doesn't exist";
+                popUpMessage(endGame = false);
+            
+            }else{
+                let answerTmp = answer; 
+                for(let i = currentLetter-4; i <= currentLetter; i++){
+                    let character = letterArray[i].innerHTML; 
+                    
+                    // green, yellow, gray class have priorities in css file 
+                    for(let j = 0; j < 5; j++){
+                        if(character == answerTmp[j] && j == i%5){
+                            // green
+                            letterArray[i].classList.add('backgroundGreen');
+                            document.getElementById(`key${character}`).classList.add('backgroundGreen');
+                        }else if(character == answerTmp[j]){
+                            // yellow 
+                            letterArray[i].classList.add('backgroundYellow');
+                            document.getElementById(`key${character}`).classList.add('backgroundYellow');
+                        }else{
+                            // gray 
+                            letterArray[i].classList.add('backgroundGrey');
+                            document.getElementById(`key${character}`).classList.add('backgroundGrey');
+                        }
+                    }
+                }
+                console.log(guess);
+                if(guess === answer){
+                    document.getElementById("result").innerHTML = "You win <br> Congratulation";
+                    popUpMessage(endGame = true);
+                }else{
+                    if(currentLetter == 29){
+                        document.getElementById("result").innerHTML = `You lose <br> The answer is ${answer}`;
+                        popUpMessage(endGame = true);
+                    }else{
+                        currentLetter++;
+                    }
+                }
+            }
+        }else{
+            document.getElementById("result").innerHTML = "Volcabulary is not long enough";
+            popUpMessage(endGame = false);
+        }
+    }else if(key.match(/^[a-zA-Z]$/)){
+        letterArray[currentLetter].innerHTML = key.toUpperCase();
+        if(currentLetter%5<4) 
+            currentLetter++;
+    }
+
+}
+
+function popUpMessage(endGame){
+    document.getElementById('popup').style.display = 'block';
+    document.getElementById('popup-overlay').style.display = 'block';
+    if(endGame){
+        document.getElementById("endGameButton").style.display = 'block';
+        document.getElementById("contiGameButton").style.display = 'none';
+    }else{
+        document.getElementById("endGameButton").style.display = 'none';
+        document.getElementById("contiGameButton").style.display = 'block';
+    }
+}
+
+function closePopup(endGame) {
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('popup-overlay').style.display = 'none';
+    if(endGame){
+        location.reload();
+    }
+}
+
+</script>

@@ -100,26 +100,32 @@ function keyProcess(code, key){
             
             }else{
                 let answerTmp = answer; 
+                // green, yellow, gray class have priorities in css file 
+                // check the green letter first
                 for(let i = currentLetter-4; i <= currentLetter; i++){
                     let character = letterArray[i].innerHTML; 
-                    
-                    // green, yellow, gray class have priorities in css file 
                     for(let j = 0; j < 5; j++){
                         if(character == answerTmp[j] && j == i%5){
                             // green
                             letterArray[i].classList.add('backgroundGreen');
                             document.getElementById(`key${character}`).classList.add('backgroundGreen');
-                        }else if(character == answerTmp[j]){
-                            // yellow 
+                        }
+                    }
+                }
+                // check yellow and gray letter
+                for(let i = currentLetter-4; i <= currentLetter; i++){
+                    let character = letterArray[i].innerHTML;
+                    for(let j = 0; j < 5; j++){
+                        if(character == answerTmp[j] &&  (!letterArray[j].classList.contains('backgroundGreen'))){
                             letterArray[i].classList.add('backgroundYellow');
                             document.getElementById(`key${character}`).classList.add('backgroundYellow');
                         }else{
-                            // gray 
                             letterArray[i].classList.add('backgroundGrey');
                             document.getElementById(`key${character}`).classList.add('backgroundGrey');
                         }
                     }
                 }
+
                 console.log(guess);
                 if(guess === answer){
                     document.getElementById("result").innerHTML = "You win <br> Congratulation";

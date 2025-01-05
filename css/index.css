@@ -1,108 +1,83 @@
 body {
-    font-family:  sans-serif;
-    background-color: #f7f7f7;
-    color: #333;
+    font-family: sans-serif;
+    background-color: #F5F6FA; 
+    color: #333333;
     max-width: 800px;
     margin: auto;
-    padding: 20px;
 }
 
 h1 {
-    color: #4a6fa5;
-    font-size: 2.2em;
+    color: #4A90E2;
+    font-size: 5em;
     text-align: center;
-}t 
+    font-family: 'Trirong';
+    padding: 0px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
 
 h2 {
-    font-size: 1.5em;
-    margin-top: 30px;
-    border: #3b598a solid 1px;
-    background-color: #3b598a;
-    color: white;
+    font-size: 1.7em;
+    margin-top: 10px;
+    border: #1C3A5D solid 1px; 
+    background-color: #1C3A5D; 
+    color: white; 
     text-align: center;
     border-radius: 5px;
+    padding: 2px;
 }
 
-img {
-    position: absolute;
-    top: 20px;
-    left: 20px; 
-}
+.math-container, .code-container, .game-container {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0px;
+    margin-bottom: 40px;
 
-
-h3 {
-    font-size: 1.1em;
-    margin-top: 20px;
-}
-
-p, ul, li, pre, code {
-    margin-bottom: 20px;
 }
 
 ul {
-    padding-left: 20px;
+    display: inline-flex;
+    border: #D1D5DB solid 2px; /* Cool gray for borders */
+    border-radius: 5px;
+    height: 100px;
+    justify-content: center;
+    text-align: center;
+    margin: 5px;
+    padding: 0px;
+    align-items: center;
+    font-weight: bold;
+    background-color: #FFFFFF; /* White for block background */
+    color: #333333; /* Charcoal gray for text */
 }
 
-li {
-    margin-bottom: 10px;
+.math-container ul {
+    width: 200px;
 }
 
-a {
-    color: #4a6fa5;
+.code-container ul {
+    width: 170px;
+}
+
+.game-container ul {
+    width: 200px;
+}
+
+a{
+    color: #4A90E2;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-a:hover {
-    color: #3b598a;
-    text-decoration: underline;
-}
-
-pre {
-    background-color: #f1f1f1;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow-x: auto;
-}
-
-code {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #e8e8e8;
-    padding: 3px 6px;
-    border-radius: 3px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-    background-color: #f1f1f1;
-}
-
-th {
-    background-color: #4a6fa5;
-    color: white;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 20px auto;
+ul:hover{
+    background-color: lightgray;
 }
 
 footer {
     text-align: center;
     margin-top: 40px;
     font-size: 0.9em;
-    color: #888;
+    color: #888888; 
 }
 
 #email-link {

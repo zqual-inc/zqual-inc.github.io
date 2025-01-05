@@ -20,15 +20,13 @@
     </head>
 
     <body>
-        <h1> Number Properties </h1>
+        <h1> 數字特性 </h1>
         <p id="count">Please enter an integer which are larger than 0</p>
         <input id="input" type="number" min="1" max="999" placeholder="Enter a number">
         <button id="add" onclick="enterValue()">Enter</button>
 
         <nav class="nav-menu"> 
-            <a href="../index.html"> Homepage </a> |
-            <a href="matrix.html"> Matrix </a> |
-            <a href="number.html"> Number </a>
+            <a href="../index.html"> Homepage </a>
         </nav>
         
         <table id="table1"></table>
@@ -94,13 +92,13 @@
                     }
     
                     document.getElementById("table1").innerHTML = 
-                    '<tr><td>Number: </td> <td>' + print_numbers(number) + '</td></tr>' +
-                    '<tr><td>Factorization: </td><td>' + print_numbers_factor(factor, power) + '</td></tr></table>' ;
+                    '<tr><td>數字 (Number) </td> <td>' + print_numbers(number) + '</td></tr>' +
+                    '<tr><td>質因數分解 (Factorization) </td><td>' + print_numbers_factor(factor, power) + '</td></tr></table>' ;
 
                     document.getElementById("table2").innerHTML = 
-                    '<tr><td>Prime numbers: </td> <td>' + print_prime(prime) + '</td></tr>'+
-                    '<tr><td>Armstrong numbers: </td> <td>' + print_armstrong(armstrong) + '</td></tr>' + 
-                    '<tr><td>Fibonacci numbers: </td> <td>' + print_fibonacci(fibonacci) + '</td></tr></table>'; 
+                    '<tr><td>質數 (Prime numbers) </td> <td>' + print_prime(prime) + '</td></tr>'+
+                    '<tr><td>阿姆斯壯數 (Armstrong numbers) </td> <td>' + print_armstrong(armstrong) + '</td></tr>' + 
+                    '<tr><td>費波那契數 (Fibonacci numbers) </td> <td>' + print_fibonacci(fibonacci) + '</td></tr></table>'; 
             
                 } else {
                     alert("Please enter a number larger than 0");
